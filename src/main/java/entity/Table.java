@@ -1,10 +1,11 @@
 package entity;
 
 import javax.persistence.*;
+import javax.persistence.Id;
 
 @Entity
 @javax.persistence.Table(name = "employee")
-public class Table{
+public class Table {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

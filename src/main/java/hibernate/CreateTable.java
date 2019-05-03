@@ -1,6 +1,6 @@
 package hibernate;
 
-import entity.Table;
+import entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -12,7 +12,7 @@ public class CreateTable {
         //Create session factory
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Table.class)
+                .addAnnotatedClass(Employee.class)
                 .buildSessionFactory();
 
         //Create session
@@ -23,7 +23,7 @@ public class CreateTable {
             //Create object
             System.out.println("Creating new object...");
 
-            Table table = new Table("Tom", "Anderson", "Civil&Co");
+            Employee table = new Employee("Tom", "Anderson", "Civil&Co");
 
             //Start transaction
             session.beginTransaction();
