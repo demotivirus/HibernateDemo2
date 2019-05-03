@@ -5,39 +5,39 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class CreateTable {
+import java.util.List;
+
+public class ReadTable {
 
     public static void main(String[] args) {
 
         //Create session factory
+        //New configuration - configure - addAnnotatedClass - buildSessionFactory
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Table.class)
                 .buildSessionFactory();
 
-        //Create session
+        //Create session from factory
         Session session = sessionFactory.getCurrentSession();
 
         try{
 
-            //Create object
-            System.out.println("Creating new object...");
-
-            Table table = new Table("Tom", "Anderson", "Civil&Co");
-
             //Start transaction
             session.beginTransaction();
 
-            //Save  the object
-            session.save(table);
-
-            //Commit transaction
-            session.getTransaction().commit();
-
-            System.out.println("Done!");
+            //Query read all from table
+            List<Table> tables = session.createQuery("from Table").getResultList();
+            displayTheTable(tables);
 
         } finally {
-            sessionFactory.close();
+            session.close();
+        }
+    }
+
+    public static void displayTheTable(List<Table> tables){
+        for (Table foreach : tables){
+            System.out.println(foreach);
         }
     }
 }
