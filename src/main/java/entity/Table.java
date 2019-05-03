@@ -63,6 +63,6 @@ public class Table {
 
     @Override
     public String toString() {
-        return "Table{" + "id=" + id + ", firstName='" + firstName + '\'' + '}';
+        return "Table{" + "id=" + id + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", company='" + company + '\'' + '}';
     }
 }

@@ -5,46 +5,35 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.List;
-
-public class ReadTable {
+public class UpdateTable {
 
     public static void main(String[] args) {
 
         //Create session factory
-        //New configuration - configure - addAnnotatedClass - buildSessionFactory
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Table.class)
                 .buildSessionFactory();
 
-        //Create session from factory
+        //Create session
         Session session = sessionFactory.getCurrentSession();
 
         try{
 
-            //Start transaction
+            //Begin transaction
             session.beginTransaction();
 
-            //Query read all from table
-            List<Table> tables = session.createQuery("from Table").getResultList();
+            //Create query and update
+            System.out.println("Update all employee");
+            session.createQuery("update Table set company='IndustryArg'").executeUpdate();
 
-
-            displayTheTable(tables);
-
-            //Commit transaction
+            //Commit
             session.getTransaction().commit();
 
-            System.out.println("Done");
+            System.out.println("Done!");
 
         } finally {
             session.close();
-        }
-    }
-
-    public static void displayTheTable(List<Table> tables){
-        for (Table foreach : tables){
-            System.out.println(foreach);
         }
     }
 }
