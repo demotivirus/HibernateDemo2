@@ -30,6 +30,11 @@ public class ReadTable {
             List<Table> tables = session.createQuery("from Table").getResultList();
             displayTheTable(tables);
 
+            //Commit transaction
+            session.getTransaction().commit();
+
+            System.out.println("Done");
+
         } finally {
             session.close();
         }
